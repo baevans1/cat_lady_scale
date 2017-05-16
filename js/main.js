@@ -76,6 +76,16 @@ $(document).ready(function(){
      * status - the current cat lady status object
      * updateStatus - function that updates the cat lady objects status
      */
+     var changeDot = function (idItem) {
+       $('.dot').css({
+         'background-color' : 'white',
+         'font-weight' : 'normal'
+       });
+       $('#'+ idItem).css({
+         'background-color' : 'pink',
+         'font-weight' : 'bold'
+       });
+     }
     var catLady = {
         behaviors: [],
         addBehavior : function (newBehavior) {
@@ -83,32 +93,24 @@ $(document).ready(function(){
          this.updateStatus();
 
         },
-        status: CAT_LADY_SCALE[5], // just the inital status... INDIFFERENT
+        status: CAT_LADY_SCALE[5],  // just the inital status... INDIFFERENT
         updateStatus: function () {
           var sum = 5;
           for( var i = 0; i < catLady.behaviors.length; i++) {
             sum = sum + catLady.behaviors[i].pointValue;
           }
-          var changeDot = function (idItem) {
-            $('.dot').css({
-              'background-color' : 'white'
-            });
-            $('#'+ idItem).css({
-              'background-color' : 'pink',
-              'font-weight' : 'bold'
-            });
-          }
+
           if (sum <= 0) {
               catLady.status = CAT_LADY_SCALE[0];
-              changeDot(0);
+              // changeDot(0);
 
           } else if (sum >= 10) {
               catLady.status = CAT_LADY_SCALE[10];
-              changeDot(10);
+              // changeDot(10);
 
           } else {
               catLady.status = CAT_LADY_SCALE[sum];
-              changeDot(testArray[sum]);
+              // changeDot(testArray[sum]);
           }
 
           return catLady.status;
@@ -146,6 +148,11 @@ $(document).ready(function(){
 
       $(".status-image").html("<img width='100%' src='" + catLadyStatus.imagePath() + "'/>");
       $(".status-title").html(catLadyStatus.title);
+      for( var i = 0; i < testArray.length; i++) {
+        if(CAT_LADY_SCALE[i] == catLady.status){
+        changeDot(i);
+        }
+      }
 
     }
 
@@ -177,31 +184,23 @@ $(document).ready(function(){
         "<p>" + index + "</p>" +
       "</div>");
   });
-$('.dotScale').css({
-  'display' : 'flex',
-  'justify-content' : 'space-between',
-  'margin' : '10px',
-  'height' : '40px'
+  $('.dotScale').css({
+    'display' : 'flex',
+    'justify-content' : 'space-between',
+    'margin' : '10px',
+    'height' : '40px'
 
-});
-$('.dot').css({
-  'display' : 'flex',
-  'justify-content' : 'center',
-  'align-items' : 'space-between',
-  'line-height' : '5rem',
-  'border': '2px solid black',
-  'border-radius' : '100%',
-  'width' : '20px',
-  'height' : '20px'
-});
-
-// for(i = 0; i < testArray.length; i++) {
-//   if (CAT_LADY_SCALE == i) {
-//     $('.dot').css({
-//       'background-color' : 'pink'
-//     });
-//   };
-// };
+  });
+  $('.dot').css({
+    'display' : 'flex',
+    'justify-content' : 'center',
+    'align-items' : 'space-between',
+    'line-height' : '5rem',
+    'border': '2px solid black',
+    'border-radius' : '100%',
+    'width' : '20px',
+    'height' : '20px'
+  });
 
     /*
      * Updates the selected options in the add behavior drop down
@@ -215,4 +214,5 @@ $('.dot').css({
     // initial setup
     fillBehaviorDropDown(); // fill drop down
     displayStatus(catLady.status); // display initial cat lady status
+
 });
