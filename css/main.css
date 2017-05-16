@@ -127,3 +127,9 @@ h1, h2, h3, h4, h5 {
     padding: 1rem;
     background: #ffffff;
 }
+.dot {
+  border: 2px solid black;
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+}
