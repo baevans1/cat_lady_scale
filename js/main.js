@@ -106,6 +106,7 @@ $(document).ready(function(){
 
           } else if (sum >= 10) {
               catLady.status = CAT_LADY_SCALE[10];
+            
               // changeDot(10);
 
           } else {
@@ -180,8 +181,9 @@ $(document).ready(function(){
   }
   testArray.forEach(function(index) {
 
-  $('.dotScale').append("<div class = 'dot' id = " + index + ">" +
+  $('.dotScale').append("<div class = 'dot hoverBox' id = " + index + ">" +
         "<p>" + index + "</p>" +
+        "<p class = 'hoverText'>" + CAT_LADY_SCALE[index].title + "</p>" +
       "</div>");
   });
   $('.dotScale').css({
@@ -201,6 +203,7 @@ $(document).ready(function(){
     'width' : '20px',
     'height' : '20px'
   });
+
 
     /*
      * Updates the selected options in the add behavior drop down
